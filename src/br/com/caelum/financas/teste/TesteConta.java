@@ -10,13 +10,13 @@ public class TesteConta {
 	
 	public static void main(String[] args) {
 		
-		Conta conta = new Conta("Leonardo", "45620", "Caixa", "054");
+//		Conta conta = new Conta(1, "Leonardo", "45620", "Caixa", "054");
 		
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("financas");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		entityManager.getTransaction().begin();
-		entityManager.persist(conta);
+		System.out.println(entityManager.find(Conta.class, 1));
 		entityManager.getTransaction().commit();
 		
 		entityManager.close();
