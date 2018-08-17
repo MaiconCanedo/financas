@@ -16,7 +16,13 @@ public class Conta {
 	private String banco;
 	private String agencia;
 	
+	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+	@Deprecated
 	public Conta() {}
+	
+	public Conta(Integer id) {
+		this.id = id;
+	}
 	
 	public Conta(String titular, String numero, String banco, String agencia) {
 		this.titular = titular;
@@ -29,7 +35,8 @@ public class Conta {
 		this(titular, numero, banco, agencia);
 		this.id = id;
 	}
-
+	
+	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Override
 	public int hashCode() {
 		final int prime = 31;

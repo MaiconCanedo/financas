@@ -8,6 +8,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Aqui são listadas todas as entidades -->
 		<class>br.com.caelum.financas.modelo.Conta</class>
+		<class>br.com.caelum.financas.modelo.Movimentacao</class>
 		<properties>
 			<!-- Propriedades JDBC -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
