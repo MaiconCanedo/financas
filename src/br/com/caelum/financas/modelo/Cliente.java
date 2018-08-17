@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -16,9 +17,10 @@ public class Cliente {
 	private String profissao;
 	private String endereco;
 	
+	@JoinColumn(unique = true)
 	@OneToOne
 	private Conta conta;
-	
+
 	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Deprecated
 	public Cliente() {}
@@ -31,13 +33,13 @@ public class Cliente {
 		this(nome, profissao, endereco, conta);
 		this.id = id;
 	}
+	
 	public Cliente(String nome, String profissao, String endereco, Conta conta) {
 		this.nome = nome;
 		this.profissao = profissao;
 		this.endereco = endereco;
 		this.conta = conta;
 	}
-
 
 	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	public Integer getId() {
@@ -70,5 +72,13 @@ public class Cliente {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 }
