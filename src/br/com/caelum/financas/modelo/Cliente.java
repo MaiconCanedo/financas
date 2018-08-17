@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Clienta {
+public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,26 @@ public class Clienta {
 	@OneToOne
 	private Conta conta;
 	
+	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+	@Deprecated
+	public Cliente() {}
+	
+	public Cliente(Integer id) {
+		this.id = id;
+	}
+	
+	public Cliente(Integer id, String nome, String profissao, String endereco, Conta conta) {
+		this(nome, profissao, endereco, conta);
+		this.id = id;
+	}
+	public Cliente(String nome, String profissao, String endereco, Conta conta) {
+		this.nome = nome;
+		this.profissao = profissao;
+		this.endereco = endereco;
+		this.conta = conta;
+	}
+
+
 	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	public Integer getId() {
 		return id;
