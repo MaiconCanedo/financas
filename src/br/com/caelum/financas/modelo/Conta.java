@@ -25,8 +25,8 @@ public class Conta {
 	}
 	
 	public Conta(String titular, String numero, String banco, String agencia) {
-		this.titular = titular;
 		this.numero = numero;
+		this.titular = titular;
 		this.banco = banco;
 		this.agencia = agencia;
 	}
@@ -64,7 +64,7 @@ public class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta [id=" + id + ", titular=" + titular + ", numero=" + numero + ", banco=" + banco + ", agencia=" + agencia + "]";
+		return "Conta [id=" + id + ", numero=" + numero + ", banco=" + banco + ", agencia=" + agencia + "]";
 	}
 
 	public Integer getId() {
@@ -73,14 +73,6 @@ public class Conta {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTitular() {
-		return titular;
-	}
-
-	public void setTitular(String titular) {
-		this.titular = titular;
 	}
 
 	public String getNumero() {
@@ -105,5 +97,12 @@ public class Conta {
 
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
+	}
+	public String getTitular() {
+		return titular;
+	}
+
+	public void setTitular(String titular) {
+		this.titular = titular;
 	}
 }

@@ -16,11 +16,13 @@ public class PopulaConta {
 		EntityManager entityManager = new JPAUtil().getEntityManager();
 		
 		entityManager.getTransaction().begin();
+		
 		entityManager.persist(conta1);
 		entityManager.persist(conta2);
 		entityManager.persist(conta3);
 		entityManager.persist(conta4);
 		entityManager.persist(conta5);
+		
 		entityManager.getTransaction().commit();
 		
 		entityManager.close();

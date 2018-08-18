@@ -1,6 +1,7 @@
 package br.com.caelum.financas.modelo;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Movimentacao {
@@ -35,15 +37,17 @@ public class Movimentacao {
 	@ManyToMany
 	private List<Categoria> categorias;
 	
+	@Transient //essa anotação diz ao JPA para não persistir o atributo abaixo dela
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	// \\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Deprecated
 	public Movimentacao() {}
-
+	
 	public Movimentacao(Integer id, BigDecimal valor, TipoMovimentacao tipo, Calendar data, String descricao, Conta conta, List<Categoria> categorias) {
 		this(valor, tipo, data, descricao, conta, categorias);
 		this.id = id;
 	}
-
+	
 	public Movimentacao(BigDecimal valor, TipoMovimentacao tipo, Calendar data, String descricao, Conta conta, List<Categoria> categorias) {
 		this.valor = valor;
 		this.tipo = tipo;
@@ -52,8 +56,39 @@ public class Movimentacao {
 		this.conta = conta;
 		this.categorias = categorias;
 	}
-
+	
 	// \\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+	@Override
+	public String toString() {
+		return "Movimentacao [id=" + id + ", valor=" + valor + ", tipo=" + tipo + ", data=" + simpleDateFormat.format(data.getTime()) + ", descricao=" + descricao + ", conta=" + conta + ", categorias="
+				+ categorias + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Movimentacao other = (Movimentacao) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

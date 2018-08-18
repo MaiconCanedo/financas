@@ -20,7 +20,7 @@ public class Cliente {
 	@JoinColumn(unique = true)
 	@OneToOne
 	private Conta conta;
-
+	
 	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Deprecated
 	public Cliente() {}
@@ -40,8 +40,15 @@ public class Cliente {
 		this.endereco = endereco;
 		this.conta = conta;
 	}
-
+	
 	//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", profissao=" + profissao + ", endereco=" + endereco + ", conta=" + conta + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getProfissao()=" + getProfissao() + ", getEndereco()=" + getEndereco() + ", getConta()=" + getConta() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
 	public Integer getId() {
 		return id;
 	}
