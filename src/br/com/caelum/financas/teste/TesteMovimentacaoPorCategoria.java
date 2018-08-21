@@ -5,12 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.caelum.financas.modelo.Conta;
+import br.com.caelum.financas.modelo.Categoria;
 import br.com.caelum.financas.modelo.Movimentacao;
-import br.com.caelum.financas.modelo.TipoMovimentacao;
 import br.com.caelum.financas.util.JPAUtil;
 
-public class TeteJPQL {
+public class TesteMovimentacaoPorCategoria {
 	
 	public static void main(String[] args) {
 		
@@ -18,11 +17,10 @@ public class TeteJPQL {
 		
 		entityManager.getTransaction().begin();
 		
-		Conta conta = new Conta(2);
+		Categoria categoria = new Categoria(1);
 		
-		Query query = entityManager.createQuery("SELECT m FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo order by m.valor desc");
-		query.setParameter("pConta", conta);
-		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
+		Query query = entityManager.createQuery("select m from Movimentacao m join m.categorias c where c = :pCategoria");
+		query.setParameter("pCategoria", categoria);
 		
 		@SuppressWarnings("unchecked")
 		List<Movimentacao> lista = query.getResultList();
@@ -32,7 +30,6 @@ public class TeteJPQL {
 		}
 		
 		entityManager.getTransaction().commit();
-		
 		entityManager.close();
-	}
+	} 
 }

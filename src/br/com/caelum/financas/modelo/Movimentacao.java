@@ -33,21 +33,23 @@ public class Movimentacao {
 
 	@ManyToOne
 	private Conta conta;
-	
+
 	@ManyToMany
 	private List<Categoria> categorias;
-	
-	@Transient //essa anotação diz ao JPA para não persistir o atributo abaixo dela
+
+	@Transient // essa anotação diz ao JPA para não persistir o atributo abaixo dela
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
 	// \\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Deprecated
-	public Movimentacao() {}
-	
+	public Movimentacao() {
+	}
+
 	public Movimentacao(Integer id, BigDecimal valor, TipoMovimentacao tipo, Calendar data, String descricao, Conta conta, List<Categoria> categorias) {
 		this(valor, tipo, data, descricao, conta, categorias);
 		this.id = id;
 	}
-	
+
 	public Movimentacao(BigDecimal valor, TipoMovimentacao tipo, Calendar data, String descricao, Conta conta, List<Categoria> categorias) {
 		this.valor = valor;
 		this.tipo = tipo;
@@ -56,14 +58,14 @@ public class Movimentacao {
 		this.conta = conta;
 		this.categorias = categorias;
 	}
-	
+
 	// \\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Override
 	public String toString() {
-		return "Movimentacao [id=" + id + ", valor=" + valor + ", tipo=" + tipo + ", data=" + simpleDateFormat.format(data.getTime()) + ", descricao=" + descricao + ", conta=" + conta + ", categorias="
-				+ categorias + "]";
+		return "Movimentacao [id=" + id + ", valor=" + valor + ", tipo=" + tipo + ", data=" + (data != null ? simpleDateFormat.format(data.getTime()) : null) + ", descricao="
+				+ descricao + ", conta=" + conta + ", categorias=" + categorias + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,7 +90,7 @@ public class Movimentacao {
 			return false;
 		return true;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
