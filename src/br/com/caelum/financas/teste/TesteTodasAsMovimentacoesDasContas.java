@@ -17,11 +17,13 @@ public class TesteTodasAsMovimentacoesDasContas {
 		
 		entityManager.getTransaction().begin();
 		
-		Query query = entityManager.createQuery("SELECT c FROM Conta c join fetch c.movimentacoes");
+		Query query = entityManager.createQuery("SELECT distinct c FROM Conta c left join fetch c.movimentacoes");
+
+		@SuppressWarnings("unchecked")
 		List<Conta> todasAsContas = query.getResultList();
 		
 		for (Conta conta : todasAsContas) {
-			System.out.println("Titular: " + conta.getTitular() + "\nMovimentacoes:");
+			System.out.println("Titular: " + conta.getTitular() + ", Conta.id: " + conta.getId() + "\nMovimentacoes:");
 			for (Movimentacao movimentacao : conta.getMovimentacoes()) {
 				System.out.println(movimentacao);
 			}

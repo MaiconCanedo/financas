@@ -70,7 +70,7 @@ public class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta [id=" + id + ", numero=" + numero + ", banco=" + banco + ", agencia=" + agencia + "]";
+		return "Conta [id=" + id + ", titular=" + titular + ", numero=" + numero + ", banco=" + banco + ", agencia=" + agencia + "]";
 	}
 
 	public Integer getId() {
