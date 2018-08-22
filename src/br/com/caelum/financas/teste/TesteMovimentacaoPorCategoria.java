@@ -3,8 +3,8 @@ package br.com.caelum.financas.teste;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
+import br.com.caelum.financas.dao.MovimentacaoDao;
 import br.com.caelum.financas.modelo.Categoria;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.util.JPAUtil;
@@ -19,10 +19,8 @@ public class TesteMovimentacaoPorCategoria {
 		
 		Categoria categoria = new Categoria(1);
 		
-		TypedQuery<Movimentacao> query = entityManager.createQuery("select m from Movimentacao m join m.categorias c where c = :pCategoria", Movimentacao.class);
-		query.setParameter("pCategoria", categoria);
-		
-		List<Movimentacao> lista = query.getResultList();
+		MovimentacaoDao movimentacaoDao = new MovimentacaoDao(entityManager);
+		List<Movimentacao> lista = movimentacaoDao.getMovimentacaoPorCategoria(categoria);
 		
 		for (Movimentacao movimentacao : lista) {
 			System.out.println(movimentacao);

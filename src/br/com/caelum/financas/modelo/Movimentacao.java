@@ -13,17 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
 @Entity
+@NamedQuery(query = "SELECT avg(m.valor) FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo group by day(m.data), month(m.data), year(m.data)", name="MediasPorDiaETipo")
 public class Movimentacao {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	private BigDecimal valor;
-
+	
 	@Enumerated(EnumType.STRING)
 	private TipoMovimentacao tipo;
 
@@ -42,8 +44,7 @@ public class Movimentacao {
 
 	// \\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 	@Deprecated
-	public Movimentacao() {
-	}
+	public Movimentacao() {}
 
 	public Movimentacao(Integer id, BigDecimal valor, TipoMovimentacao tipo, Calendar data, String descricao, Conta conta, List<Categoria> categorias) {
 		this(valor, tipo, data, descricao, conta, categorias);
