@@ -3,7 +3,7 @@ package br.com.caelum.financas.teste;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
@@ -20,11 +20,10 @@ public class TeteJPQL {
 		
 		Conta conta = new Conta(2);
 		
-		Query query = entityManager.createQuery("SELECT m FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo order by m.valor desc");
+		TypedQuery<Movimentacao> query = entityManager.createQuery("SELECT m FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo order by m.valor desc", Movimentacao.class);
 		query.setParameter("pConta", conta);
 		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
 		
-		@SuppressWarnings("unchecked")
 		List<Movimentacao> lista = query.getResultList();
 		
 		for (Movimentacao movimentacao : lista) {

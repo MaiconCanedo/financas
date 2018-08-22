@@ -3,7 +3,7 @@ package br.com.caelum.financas.teste;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
@@ -17,9 +17,8 @@ public class TesteTodasAsMovimentacoesDasContas {
 		
 		entityManager.getTransaction().begin();
 		
-		Query query = entityManager.createQuery("SELECT distinct c FROM Conta c left join fetch c.movimentacoes");
+		TypedQuery<Conta> query = entityManager.createQuery("SELECT distinct c FROM Conta c left join fetch c.movimentacoes", Conta.class);
 
-		@SuppressWarnings("unchecked")
 		List<Conta> todasAsContas = query.getResultList();
 		
 		for (Conta conta : todasAsContas) {

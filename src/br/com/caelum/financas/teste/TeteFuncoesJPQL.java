@@ -3,7 +3,7 @@ package br.com.caelum.financas.teste;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -19,15 +19,14 @@ public class TeteFuncoesJPQL {
 		
 		Conta conta = new Conta(2);
 		
-		Query query = entityManager.createQuery("SELECT avg(m.valor) FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo"
-				+ " group by day(m.data), month(m.data), year(m.data)");
+		TypedQuery<Double> query = entityManager.createQuery("SELECT avg(m.valor) FROM Movimentacao m WHERE m.conta = :pConta AND m.tipo = :pTipo"
+				+ " group by day(m.data), month(m.data), year(m.data)", Double.class);
 		query.setParameter("pConta", conta);
 		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
 		
-		@SuppressWarnings("unchecked")
 		List<Double> medias = query.getResultList();
-		System.out.println("Médias: " + medias);
-		
+		System.out.println("Média do dia 22: " + medias);
+
 		entityManager.getTransaction().commit();
 		
 		entityManager.close();
